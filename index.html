@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #f8fafc;
+      font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      max-width: 720px;
+      padding: 40px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+      margin-top: 16px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .hidden { display: none; }
+
+    .error {
+      color: #fca5a5;
+      margin-top: 12px;
+    }
+
+    p { line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<!-- ANTES DE LA HORA -->
+<div id="locked" class="card">
+  <h1>⏳ Aún no es el momento</h1>
+  <p>
+    Este mensaje se abrirá hoy a las <strong>11:55 PM</strong>.
+  </p>
+</div>
+
+<!-- INPUT DE CONTRASEÑA -->
+<div id="unlock" class="card hidden">
+  <h1>🔐</h1>
+  <p>Escribe la contraseña</p>
+  <input type="password" id="password" placeholder="••••••">
+  <br>
+  <button onclick="unlock()">Abrir</button>
+  <div id="error" class="error hidden">Contraseña incorrecta</div>
+</div>
+
+<!-- CARTA -->
+<div id="letter" class="card hidden">
+  <h1>Amor mío,</h1>
+  <p>
+    Este año no fue fácil, pero aquí estamos… juntos.
+    Y hoy quiero que sepas que creo profundamente
+    que este año saldremos adelante.
+  </p>
+  <p class="destacado">
+    Lo mejor de este año fue que Dios nunca nos abandonó.
+  </p>
+  <p>
+    Gracias por quedarte, por no soltar mi mano
+    y por caminar conmigo incluso cuando fue difícil.
+  </p>
+  <p>
+    Que este nuevo año nos encuentre más unidos,
+    con más fe, más amor y más esperanza.
+  </p>
+  <p class="firma">
+    Con todo mi amor,<br>
+    Zulema 🤍
+  </p>
+</div>
+
+<script>
+  const openDate = new Date(
+    new Date().getFullYear(),
+    11, 31, 23, 55
+  );
+
+  const locked = document.getElementById("locked");
+  const unlockBox = document.getElementById("unlock");
+  const letter = document.getElementById("letter");
+
+  function checkTime() {
+    const now = new Date();
+    if (now >= openDate) {
+      locked.classList.add("hidden");
+      unlockBox.classList.remove("hidden");
+    }
+  }
+
+  function unlock() {
+    const pass = document.getElementById("password").value;
+    if (pass === "2026") {
+      unlockBox.classList.add("hidden");
+      letter.classList.remove("hidden");
+    } else {
+      document.getElementById("error").classList.remove("hidden");
+    }
+  }
+
+  checkTime();
+  setInterval(checkTime, 5000);
+</script>
+
+</body>
+</html>
